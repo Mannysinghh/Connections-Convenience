@@ -3,7 +3,12 @@ public class cmpe130projectjava {
 
 //        System.out.println("HELLOW");
 
+        Controller c = new Controller();
+//        c.printMaps();
+
         Model app = new Model();
         View m = new View(app);
+
+
     }
 }
