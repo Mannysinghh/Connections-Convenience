@@ -1,14 +1,25 @@
+import javax.swing.*;
+
 public class cmpe130projectjava {
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
-//        System.out.println("HELLOW");
-
-        Controller c = new Controller();
-//        c.printMaps();
-
-        Model app = new Model();
-        View m = new View(app);
-
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    createAndShowGUI();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
+
+    public static void createAndShowGUI() throws Exception {
+
+        Model app = new Model();
+        new View(app);
+    }
+
 }
+

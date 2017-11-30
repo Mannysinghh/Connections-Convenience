@@ -1,9 +1,4 @@
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.List;
+import java.util.*;
 
 public class Controller {
     private String degree;
@@ -17,115 +12,186 @@ public class Controller {
 //    private double[] teamworkList = {10, 15, 450, 400, 200, 460, 15, 65, 70};
 
     private String[] employeeList = {
-            "Carlos Meserve   ",
-            "Laurie Bean      ",
-            "Cyrstal Marone   ",
-            "Meagan Lafon     ",
-            "Glynda Wenrich   ",
-            "Brandi Delph     ",
-            "Ashlie Peffer    ",
-            "Brynn Conigliaro ",
-            "Wynona Dames     ",
-            "Tressa Deblasio  ",
-            "Denese Douthit   ",
-            "Adeline Parkes   ",
+            "Carlos Meserve",
+            "Laurie Bean",
+            "Cyrstal Marone",
+            "Meagan Lafon",
+            "Glynda Wenrich",
+            "Brandi Delph",
+            "Ashlie Peffer",
+            "Brynn Conigliaro",
+            "Wynona Dames",
+            "Tressa Deblasio",
+            "Denese Douthit",
+            "Adeline Parkes",
             "Arlette Richarson",
-            "Irving Mcdill    ",
-            "Dawn Rolston     ",
+            "Irving Mcdill",
+            "Dawn Rolston",
             "Darwin Braunstein",
-            "Edris Bay        ",
-            "Apolonia Demps   ",
-            "Erik Smale       ",
-            "Senaida Brunelle ",
-            "Katharina Arms   ",
-            "Shaunta Baltz    ",
-            "Jacqui Herbert   ",
-            "Talitha Warnke   ",
-            "Marcelina Mecham ",
-            "Cindy Rogue      ",
-            "Lennie Hinkley   ",
-            "Hope Bellin      ",
-            "Deonna Weist     ",
-            "Macy Pablo       ",
-            "Herman Tobia     ",
-            "Marian Ketterer  ",
-            "Celia Hutson     ",
-            "Marina Schipper  ",
-            "Lenore Kendricks ",
-            "Mario Stjohn     ",
+            "Edris Bay",
+            "Apolonia Demps",
+            "Erik Smale",
+            "Senaida Brunelle",
+            "Katharina Arms",
+            "Shaunta Baltz",
+            "Jacqui Herbert",
+            "Talitha Warnke",
+            "Marcelina Mecham",
+            "Cindy Rogue",
+            "Lennie Hinkley",
+            "Hope Bellin",
+            "Deonna Weist",
+            "Macy Pablo",
+            "Herman Tobia",
+            "Marian Ketterer",
+            "Celia Hutson",
+            "Marina Schipper",
+            "Lenore Kendricks",
+            "Mario Stjohn",
             "Madelyn Pendelton",
-            "Anglea Cobian    ",
-            "Dovie Mcgarity   ",
-            "Samantha Bryd    ",
-            "Ciera Pellegren  ",
-            "Lavonna Wingo    ",
+            "Anglea Cobian",
+            "Dovie Mcgarity",
+            "Samantha Bryd",
+            "Ciera Pellegren",
+            "Lavonna Wingo",
             "Shaunte Kavanaugh",
-            "Corina Leong     ",
+            "Corina Leong",
             "Hermelinda Karzak",
-            "Lionel Baltes    ",
-            "Lucy Bohr        ",
+            "Lionel Baltes",
+            "Lucy Bohr",
             "Magnolia Ringgold",
-            "Colette Julio    ",
-            "Jarrett Stadler  ",
+            "Colette Julio",
+            "Jarrett Stadler",
     };
 
-    private String[] degreeList = {"CS  ",  "NETW", "NETW","CMPE", "CMPE",
-            "CMPE",  "MIS ", "SE  ", "SE  ", "SE  ", "SE  ", "MIS ",  "MIS ", "MIS ", "CS  ",
-            "MIS ", "CS  ", "CS  ", "CS  ", "CMPE","CMPE","CMPE","CS  ", "SE  ","CS  ", "MIS ",
-            "CS  ", "NETW", "NETW", "CMPE", "NETW", "SE  ", "MIS ",
-            "MIS ", "CMPE", "CMPE", "NETW", "NETW", "NETW", "CS  ",
-            "SE  ", "CMPE", "MIS ", "SE  ", "MIS ", "SE  ", "CMPE", "NETW", "NETW", "NETW"};
+    private String[] degreeList = {"CS",  "NETW", "NETW","CMPE", "CMPE",
+            "CMPE",  "MIS", "SE", "SE", "SE", "SE", "MIS",  "MIS", "MIS", "CS",
+            "MIS", "CS", "CS", "CS", "CMPE","CMPE","CMPE","CS", "SE","CS", "MIS",
+            "CS", "NETW", "NETW", "CMPE", "NETW", "SE", "MIS",
+            "MIS", "CMPE", "CMPE", "NETW", "NETW", "NETW", "CS",
+            "SE", "CMPE", "MIS", "SE", "MIS", "SE", "CMPE", "NETW", "NETW", "NETW"};
 
-    private double[] salaryList = {3000, 4000, 5000, 6000, 7000, 5000, 6000, 7000,
+    private int[] salaryList = {3000, 4000, 5000, 6000, 7000, 5000, 6000, 7000,
             4000, 3000, 3000, 4000, 3000, 4000, 5000, 6000, 7000, 5000, 6000, 7000,
             4000, 3000, 5000, 6000, 7000, 3000, 4000, 5000, 6000, 7000, 5000, 6000,
             7000, 4000, 3000, 5000, 6000, 3000, 4000, 5000, 6000, 7000, 5000, 6000,
             7000, 4000, 3000, 7000, 4000, 3000};
 
-    private double[] qualityList = {1, 2, 2, 3, 5, 5, 3, 4, 1, 1, 1, 2, 3, 4, 4, 5,
+    private int[] qualityList = {1, 2, 2, 3, 5, 5, 3, 4, 1, 1, 1, 2, 3, 4, 4, 5,
             4, 4, 5, 4, 3, 2, 5, 3, 1, 5, 3, 4, 4, 5, 3, 3, 2, 2, 1, 5, 5, 1, 4, 4,
             3, 2, 5, 4, 5, 4, 3, 4, 5, 5};
 
-    private double[] teamworkList = {5, 2, 2, 3, 5, 5, 3, 4, 1, 1, 1, 2, 3, 4, 4,
+    private int[] teamworkList = {5, 2, 2, 3, 5, 5, 3, 4, 1, 1, 1, 2, 3, 4, 4,
             5, 4, 4, 5, 4, 3, 2, 5, 3, 3, 2, 3, 4, 4, 5, 3, 3, 2, 2, 1, 5, 5, 5, 5,
             3, 3, 1, 5, 3, 5, 4, 2, 5, 3, 2};
 
 
 //    private String[] degreeListSorted;
-    private double[] salaryListSorted;
-    private double[] qualityListSorted;
-    private double[] teamworkListSorted;
+    private int[] salaryListSorted;
+    private int[] qualityListSorted;
+    private int[] teamworkListSorted;
 
 
-    Hashtable<String, String> mapDegree = new Hashtable<>();
-    Hashtable<String, Double> mapPrice = new Hashtable<>();
-    Hashtable<String, Double> mapQuality = new Hashtable<>();
-    Hashtable<String, Double> mapTeamwork = new Hashtable<>();
+    private Hashtable<String, String> mapDegree = new Hashtable<>();
+    private Hashtable<String, Integer> mapSalary = new Hashtable<>();
+    private Hashtable<String, Integer> mapQuality = new Hashtable<>();
+    private Hashtable<String, Integer> mapTeamwork = new Hashtable<>();
 
 
-    Hashtable<String, String> mapDegreeKey = new Hashtable<>();
-    Hashtable<Double, String> mapPriceKey = new Hashtable<>();
-    Hashtable<Double, String> mapQualityKey = new Hashtable<>();
-    Hashtable<Double, String> mapTeamworkKey = new Hashtable<>();
+    private Hashtable<String, List<String>> mapDegreeKey = new Hashtable<>();
+    private Hashtable<Integer, List<String>> mapSalaryKey = new Hashtable<>();
+    private Hashtable<Integer, List<String>> mapQualityKey = new Hashtable<>();
+    private Hashtable<Integer, List<String>> mapTeamworkKey = new Hashtable<>();
 
+    private List<String> qualityMapList = null;
+    private List<String> salaryMapList = null;
+    private List<String> teamWorkMapList = null;
+    private List<String> degreeMapList = null;
+
+    public List<String> getQualityMapList() {
+        return qualityMapList;
+    }
+
+    public void setQualityMapList(List<String> qualityMapList) {
+        this.qualityMapList = qualityMapList;
+    }
+
+    public List<String> getSalaryMapList() {
+        return salaryMapList;
+    }
+
+    public void setSalaryMapList(List<String> salaryMapList) {
+        this.salaryMapList = salaryMapList;
+    }
+
+    public List<String> getTeamWorkMapList() {
+        return teamWorkMapList;
+    }
+
+    public void setTeamWorkMapList(List<String> teamWorkMapList) {
+        this.teamWorkMapList = teamWorkMapList;
+    }
+
+    public List<String> getDegreeMapList() {
+        return degreeMapList;
+    }
+
+    public void setDegreeMapList(List<String> degreeMapList) {
+        this.degreeMapList = degreeMapList;
+    }
 
     private void initiateMaps(){
-        mapPrice = new Hashtable<>();
+        mapSalary = new Hashtable<>();
         mapQuality = new Hashtable<>();
         mapTeamwork = new Hashtable<>();
         mapDegree = new Hashtable<>();
+
         for(int i = 0; i < employeeList.length; i++){
             mapQuality.put(employeeList[i], qualityList[i]);
-            mapPrice.put(employeeList[i], salaryList[i]);
+            mapSalary.put(employeeList[i], salaryList[i]);
             mapTeamwork.put(employeeList[i], teamworkList[i]);
             mapDegree.put(employeeList[i], degreeList[i]);
 
 
-            mapQualityKey.put(qualityList[i], employeeList[i]);
-            mapPriceKey.put(salaryList[i], employeeList[i]);
-            mapTeamworkKey.put(teamworkList[i], employeeList[i]);
-            mapDegreeKey.put(degreeList[i], employeeList[i]);
+            if (mapQualityKey.containsKey(qualityList[i])) {
+                qualityMapList = mapQualityKey.get(qualityList[i]);
+                qualityMapList.add(employeeList[i]);
+            } else {
+                qualityMapList = new ArrayList<>();
+                qualityMapList.add(employeeList[i]);
+                mapQualityKey.put(qualityList[i], qualityMapList);
+            }
+
+            if (mapSalaryKey.containsKey(salaryList[i])) {
+                salaryMapList = mapSalaryKey.get(salaryList[i]);
+                salaryMapList.add(employeeList[i]);
+            } else {
+                salaryMapList = new ArrayList<>();
+                salaryMapList.add(employeeList[i]);
+                mapSalaryKey.put(salaryList[i], salaryMapList);
+            }
+
+            if (mapTeamworkKey.containsKey(qualityList[i])) {
+                teamWorkMapList = mapTeamworkKey.get(teamworkList[i]);
+                teamWorkMapList.add(employeeList[i]);
+            } else {
+                teamWorkMapList = new ArrayList<>();
+                teamWorkMapList.add(employeeList[i]);
+                mapTeamworkKey.put(teamworkList[i], teamWorkMapList);
+            }
+
+            if (mapDegreeKey.containsKey(degreeList[i])) {
+                degreeMapList = mapDegreeKey.get(degreeList[i]);
+                degreeMapList.add(employeeList[i]);
+            } else {
+                degreeMapList = new ArrayList<>();
+                degreeMapList.add(employeeList[i]);
+                mapDegreeKey.put(degreeList[i], degreeMapList);
+            }
+
         }
+
+
     }
 
     public Controller() {
@@ -164,14 +230,14 @@ public class Controller {
     public void printSortedHash(String s){
         List<String> nameList = Arrays.asList(employeeList);
         List<String> degList = Arrays.asList(degreeList);
-        List<double[]> salList = Arrays.asList(salaryList);
-        List<double[]> qualList = Arrays.asList(qualityList);
-        List<double[]> teamList = Arrays.asList(teamworkList);
+        List<int[]> salList = Arrays.asList(salaryList);
+        List<int[]> qualList = Arrays.asList(qualityList);
+        List<int[]> teamList = Arrays.asList(teamworkList);
 
     }
 
-    private static double[] merge(double[] a, double[] b) {
-        double[] c = new double[a.length + b.length];
+    private static int[] merge(int[] a, int[] b) {
+        int[] c = new int[a.length + b.length];
         int i = 0, j = 0;
         for (int k = 0; k < c.length; k++) {
             if      (i >= a.length) c[k] = b[j++];
@@ -182,11 +248,11 @@ public class Controller {
         return c;
     }
 
-    public static double[] mergesort(double[] input) {
+    public static int[] mergesort(int[] input) {
         int N = input.length;
         if (N <= 1) return input;
-        double[] a = new double[N/2];
-        double[] b = new double[N - N/2];
+        int[] a = new int[N/2];
+        int[] b = new int[N - N/2];
         for (int i = 0; i < a.length; i++) {
             a[i] = input[i];
         }
@@ -196,7 +262,7 @@ public class Controller {
         return merge(mergesort(a), mergesort(b));
     }
 
-    private static boolean isSorted(double[] a) {
+    private static boolean isSorted(int[] a) {
         for (int i = 1; i < a.length; i++)
             if (a[i] < a[i-1]) return false;
         return true;
@@ -209,32 +275,48 @@ public class Controller {
     }
 
     public String find(Object array, int type, Object search){
-        String value ="";
-
-        List<String> nameList = Arrays.asList(employeeList);
-        List<String> degList = Arrays.asList(degreeList);
-        List<double[]> salList = Arrays.asList(salaryList);
-        List<double[]> qualList = Arrays.asList(qualityList);
-        List<double[]> teamList = Arrays.asList(teamworkList);
         switch(type){
             case 1:
-                if(salList.contains(array)) {
-//                    View view = new View(model);
-//                    view.newFrame();
-                    for (int j = 0; j <= employeeList.length; j++) {
-                        value += employeeList[j];
+                    if (null != search && mapDegreeKey.containsKey(search)) {
+                        String degreeVal = "Degree\n";
+                        for (String emp : mapDegreeKey.get(search)) {
+                            degreeVal += emp + "\n";
+                        }
+                        System.out.println(degreeVal);
+                        return degreeVal;
                     }
-                    System.out.println(value);
-                    return value;
-                }
+                    break;
+
             case 2:
-                if(qualList.contains(array)){
-
-                }
+                    if (null != search && mapQualityKey.containsKey(search)) {
+                        String qualityVal = "Quality\n";
+                        for (String emp : mapQualityKey.get(search)) {
+                            qualityVal += emp + "\n";
+                        }
+                        System.out.println(qualityVal);
+                        return qualityVal;
+                    }
+                    break;
             case 3:
-                if(teamList.contains(array)){
-
-                }
+                    if (null != search && mapSalaryKey.containsKey(search)) {
+                        String salaryVal = "Salary\n";
+                        for (String emp : mapSalaryKey.get(search)) {
+                            salaryVal += emp + "\n";
+                        }
+                        System.out.println(salaryVal);
+                        return salaryVal;
+                    }
+                    break;
+            case 4:
+                    if (null != search && mapTeamworkKey.containsKey(search)) {
+                        String teamworkVal = "Teamwork\n";
+                        for (String emp : mapTeamworkKey.get(search)) {
+                            teamworkVal += emp + "\n";
+                        }
+                        System.out.println(teamworkVal);
+                        return teamworkVal;
+                    }
+                    break;
 
         }
         return null;
@@ -247,7 +329,7 @@ public class Controller {
         this.degree = degree;
     }
 
-    public int getSalary() {
+    public double getSalary() {
         return salary;
     }
 
@@ -255,7 +337,7 @@ public class Controller {
         this.salary = salary;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -263,13 +345,12 @@ public class Controller {
         this.price = price;
     }
 
-    public int getTeamwork() {
+    public double getTeamwork() {
         return teamwork;
     }
 
     public void setTeamwork(int teamwork) {
         this.teamwork = teamwork;
     }
-
 
 }

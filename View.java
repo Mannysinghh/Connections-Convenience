@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Arc2D;
 import java.util.Date;
 
 import javax.swing.*;
@@ -214,12 +215,20 @@ public class View {
                     System.out.println("Salary: " + salaryValue);
                     System.out.println("Quality: " + qualityValue);
                     System.out.println("Teamwork: " + teamworkValue);
+                    System.out.println();
 //                    perform function
 
                     Controller cc = new Controller((String) degreeValue, (int) salaryValue, (int) qualityValue, (int) teamworkValue);
                     cc.arraySort();
                     cc.printMaps();
 
+                    System.out.println();
+
+
+                    String degreeVal = cc.find(null, 1, degreeValue);
+                    String qualityVal = cc.find(null, 2, qualityValue);
+                    String salaryVal = cc.find(null, 3, salaryValue);
+                    String teamworkVal = cc.find(null, 4, teamworkValue);
 
 //                    cc.find(degreeValue, 1, salaryValue);
 
@@ -229,8 +238,8 @@ public class View {
                     JLabel frameTwoTopLabel;
                     newFrame = new JFrame("Output");
                     newFrame.setSize(500, 500);
-                    frameTwoTopLabel = new JLabel("         Degree           Quality" +
-                            "              Salary        Teamwork               ");
+                    frameTwoTopLabel = new JLabel("         Degree: " + degreeVal + "           Quality: "  + qualityVal +
+                            "              Salary: " + salaryVal + "        Teamwork: " + teamworkVal);
 
                     nameLabel.setText(cc.find(salaryValue, 1, salaryValue));
                     newFrame.add(frameTwoTopLabel, BorderLayout.CENTER);
