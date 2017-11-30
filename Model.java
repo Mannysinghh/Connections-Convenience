@@ -12,7 +12,6 @@ public class Model {
     int currentMonth;
     int currentYear;
 
-
     public Model(){
         GregorianCalendar cal = new GregorianCalendar();
         day = cal.get(GregorianCalendar.DAY_OF_MONTH);

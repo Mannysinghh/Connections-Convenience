@@ -52,7 +52,7 @@ public class View {
         dateJlabel =new JLabel(new Date().toString());
 
         this.classModel = classModel;
-        frame = new JFrame("Shortest Path Calculator");
+        frame = new JFrame("Connections Convenience");
         frame.setSize(500, 500);
         panel = new JPanel();
         midPanel = new JPanel();
@@ -155,10 +155,6 @@ public class View {
                 else if(qualityBox.getSelectedItem() == qualityArray[0]){
                     bottomPanel.add(qualityErrorMessage, BorderLayout.SOUTH);
                     bottomPanel.updateUI();
-                    degreeValue = 0;
-                    salaryValue = 0;
-                    qualityValue = 0;
-                    teamworkValue = 0;
                     degreeValue = degreeBox.getSelectedItem();
                     salaryValue = salaryBox.getSelectedItem();
                     qualityValue = qualityBox.getSelectedItem();
@@ -171,10 +167,6 @@ public class View {
                 else if(teamworkBox.getSelectedItem() == teamWorkArray[0]){
                     bottomPanel.add(teamworkErrorMessage, BorderLayout.SOUTH);
                     bottomPanel.updateUI();
-                    degreeValue = 0;
-                    salaryValue = 0;
-                    qualityValue = 0;
-                    teamworkValue = 0;
                     degreeValue = degreeBox.getSelectedItem();
                     salaryValue = salaryBox.getSelectedItem();
                     qualityValue = qualityBox.getSelectedItem();
@@ -187,10 +179,6 @@ public class View {
                 else if(degreeBox.getSelectedItem() == degreeArray[0]){
                     bottomPanel.add(degreeErrorMessage, BorderLayout.SOUTH);
                     bottomPanel.updateUI();
-                    degreeValue = 0;
-                    salaryValue = 0;
-                    qualityValue = 0;
-                    teamworkValue = 0;
                     degreeValue = degreeBox.getSelectedItem();
                     salaryValue = salaryBox.getSelectedItem();
                     qualityValue = qualityBox.getSelectedItem();
@@ -203,10 +191,6 @@ public class View {
                 else if(salaryBox.getSelectedItem() == salaryArray[0]){
                     bottomPanel.add(salaryErrorMessage, BorderLayout.SOUTH);
                     bottomPanel.updateUI();
-                    degreeValue = 0;
-                    salaryValue = 0;
-                    qualityValue = 0;
-                    teamworkValue = 0;
                     degreeValue = degreeBox.getSelectedItem();
                     salaryValue = salaryBox.getSelectedItem();
                     qualityValue = qualityBox.getSelectedItem();
@@ -222,10 +206,6 @@ public class View {
                     bottomPanel.remove(degreeErrorMessage);
                     bottomPanel.remove(teamworkErrorMessage);
                     bottomPanel.updateUI();
-                    degreeValue = 0;
-                    salaryValue = 0;
-                    qualityValue = 0;
-                    teamworkValue = 0;
                     degreeValue = degreeBox.getSelectedItem();
                     salaryValue = salaryBox.getSelectedItem();
                     qualityValue = qualityBox.getSelectedItem();
@@ -235,6 +215,29 @@ public class View {
                     System.out.println("Quality: " + qualityValue);
                     System.out.println("Teamwork: " + teamworkValue);
 //                    perform function
+
+                    Controller cc = new Controller((String) degreeValue, (int) salaryValue, (int) qualityValue, (int) teamworkValue);
+                    cc.arraySort();
+                    cc.printMaps();
+
+
+//                    cc.find(degreeValue, 1, salaryValue);
+
+                    JFrame newFrame;
+                    JPanel leftPanel = new JPanel();
+                    JLabel nameLabel = new JLabel();
+                    JLabel frameTwoTopLabel;
+                    newFrame = new JFrame("Output");
+                    newFrame.setSize(500, 500);
+                    frameTwoTopLabel = new JLabel("         Degree           Quality" +
+                            "              Salary        Teamwork               ");
+
+                    nameLabel.setText(cc.find(salaryValue, 1, salaryValue));
+                    newFrame.add(frameTwoTopLabel, BorderLayout.CENTER);
+                    newFrame.add(leftPanel, BorderLayout.WEST);
+                    newFrame.add(nameLabel, BorderLayout.EAST);
+                    newFrame.setVisible(true);
+
                 }
             }
         });
@@ -257,6 +260,7 @@ public class View {
         midpanel2.setVisible(true);
         panel.setVisible(true);
     }
+
     public Model getModel() {
         return this.classModel;
     }
