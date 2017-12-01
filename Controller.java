@@ -216,7 +216,7 @@ public class Controller {
     }
 
     public String findMatch(String degree, int quality, int salary, int teamwork){
-        String match = "No Match Found";
+        String match = "No Specific Match Found";
 
         String traitMatch = degree + ":" + quality + ":" + salary + ":" + teamwork;
 
@@ -225,15 +225,6 @@ public class Controller {
         }
 
         return match;
-    }
-
-    public void printSortedHash(String s){
-        List<String> nameList = Arrays.asList(employeeList);
-        List<String> degList = Arrays.asList(degreeList);
-        List<int[]> salList = Arrays.asList(salaryList);
-        List<int[]> qualList = Arrays.asList(qualityList);
-        List<int[]> teamList = Arrays.asList(teamworkList);
-
     }
 
     private static int[] merge(int[] a, int[] b) {
@@ -246,6 +237,39 @@ public class Controller {
             else                    c[k] = b[j++];
         }
         return c;
+    }
+
+    public static void mergeSortString(String[] names) {
+        if (names.length >= 2) {
+            String[] left = new String[names.length / 2];
+            String[] right = new String[names.length - names.length / 2];
+
+            for (int i = 0; i < left.length; i++) {
+                left[i] = names[i];
+            }
+
+            for (int i = 0; i < right.length; i++) {
+                right[i] = names[i + names.length / 2];
+            }
+
+            mergeSortString(left);
+            mergeSortString(right);
+            mergeSTR(names, left, right);
+        }
+    }
+
+    public static void mergeSTR(String[] names, String[] left, String[] right) {
+        int a = 0;
+        int b = 0;
+        for (int i = 0; i < names.length; i++) {
+            if (b >= right.length || (a < left.length && left[a].compareToIgnoreCase(right[b]) < 0)) {
+                names[i] = left[a];
+                a++;
+            } else {
+                names[i] = right[b];
+                b++;
+            }
+        }
     }
 
     public static int[] mergesort(int[] input) {
@@ -278,7 +302,7 @@ public class Controller {
         switch(type){
             case 1:
                 if (null != search && mapDegreeKey.containsKey(search)) {
-                    String degreeVal = "Degree\n";
+                    String degreeVal = "\n";
                     for (String emp : mapDegreeKey.get(search)) {
                         degreeVal += emp + "\n";
                     }
@@ -286,10 +310,9 @@ public class Controller {
                     return degreeVal;
                 }
                 break;
-
             case 2:
                 if (null != search && mapQualityKey.containsKey(search)) {
-                    String qualityVal = "Quality\n";
+                    String qualityVal = "\n";
                     for (String emp : mapQualityKey.get(search)) {
                         qualityVal += emp + "\n";
                     }
@@ -299,7 +322,7 @@ public class Controller {
                 break;
             case 3:
                 if (null != search && mapSalaryKey.containsKey(search)) {
-                    String salaryVal = "Salary\n";
+                    String salaryVal = "\n";
                     for (String emp : mapSalaryKey.get(search)) {
                         salaryVal += emp + "\n";
                     }
@@ -309,7 +332,7 @@ public class Controller {
                 break;
             case 4:
                 if (null != search && mapTeamworkKey.containsKey(search)) {
-                    String teamworkVal = "Teamwork\n";
+                    String teamworkVal = "\n";
                     for (String emp : mapTeamworkKey.get(search)) {
                         teamworkVal += emp + "\n";
                     }
@@ -317,10 +340,10 @@ public class Controller {
                     return teamworkVal;
                 }
                 break;
-
         }
         return null;
     }
+
     public String getDegree() {
         return degree;
     }
