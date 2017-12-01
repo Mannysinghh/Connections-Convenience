@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Arc2D;
 import java.util.Date;
+import javax.swing.*;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -236,16 +237,59 @@ public class View {
                     JPanel leftPanel = new JPanel();
                     JLabel nameLabel = new JLabel();
                     JLabel frameTwoTopLabel;
-                    newFrame = new JFrame("Output");
-                    newFrame.setSize(500, 500);
-                    frameTwoTopLabel = new JLabel("         Degree: " + degreeVal + "           Quality: "  + qualityVal +
-                            "              Salary: " + salaryVal + "        Teamwork: " + teamworkVal);
+                    //newFrame = new JFrame("Output");
+                    //newFrame.setSize(600, 600);
+                    //frameTwoTopLabel = new JLabel("         Degree: " + degreeVal + "           Quality: "  + qualityVal +
+                    //        "              Salary: " + salaryVal + "        Teamwork: " + teamworkVal);
+                    //-----------------------------------My ADDITION----------------------
 
-                    nameLabel.setText(cc.find(salaryValue, 1, salaryValue));
-                    newFrame.add(frameTwoTopLabel, BorderLayout.CENTER);
-                    newFrame.add(leftPanel, BorderLayout.WEST);
-                    newFrame.add(nameLabel, BorderLayout.EAST);
-                    newFrame.setVisible(true);
+                    JPanel middlePanel = new JPanel ();
+                    JTextArea display = new JTextArea ( 16, 15 );
+                    JTextArea display2 = new JTextArea ( 16, 15 );
+                    JTextArea display3 = new JTextArea ( 16, 15 );
+                    JTextArea display4 = new JTextArea ( 16, 15 );
+                    display.setEditable ( false ); // set textArea non-editable
+                    display2.setEditable ( false ); // set textArea non-editable
+                    display3.setEditable ( false ); // set textArea non-editable
+                    display4.setEditable ( false ); // set textArea non-editable
+                    JScrollPane scroll = new JScrollPane ( display );
+                    JScrollPane scroll2 = new JScrollPane ( display2 );
+                    JScrollPane scroll3 = new JScrollPane ( display3 );
+                    JScrollPane scroll4 = new JScrollPane ( display4 );
+
+                    scroll.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
+                    middlePanel.add ( scroll );
+                    middlePanel.add ( scroll2 );
+                    middlePanel.add ( scroll3 );
+                    middlePanel.add ( scroll4 );
+
+                    // My code
+                    JFrame frame = new JFrame("Output");
+                    frame.add ( middlePanel );
+                    frame.pack ();
+                    frame.setLocationRelativeTo ( null );
+                    frame.setVisible ( true );
+
+                    String str1 = "";
+                    String str2 = "";
+                    String str3 = "";
+                    String str4 = "";
+                    str1 += degreeVal;
+                    str2 += qualityVal;
+                    str3 += salaryVal;
+                    str4 += teamworkVal;
+                    display.setText(str1);
+                    display2.setText(str2);
+                    display3.setText(str3);
+                    display4.setText(str4);
+
+
+                    //-------------------------------MY ADDITION-----------------------------
+                  //  nameLabel.setText(cc.find(salaryValue, 1, salaryValue));
+                    //newFrame.add(frameTwoTopLabel, BorderLayout.CENTER);
+                    //newFrame.add(leftPanel, BorderLayout.WEST);
+                    //newFrame.add(nameLabel, BorderLayout.EAST);
+                    //newFrame.setVisible(true);
 
                 }
             }
