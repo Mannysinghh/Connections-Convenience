@@ -244,13 +244,24 @@ public class View {
                     //-----------------------------------My ADDITION----------------------
 
                     JPanel middlePanel = new JPanel ();
-                    JTextArea display = new JTextArea ( 16, 58 );
+                    JTextArea display = new JTextArea ( 16, 15 );
+                    JTextArea display2 = new JTextArea ( 16, 15 );
+                    JTextArea display3 = new JTextArea ( 16, 15 );
+                    JTextArea display4 = new JTextArea ( 16, 15 );
                     display.setEditable ( false ); // set textArea non-editable
+                    display2.setEditable ( false ); // set textArea non-editable
+                    display3.setEditable ( false ); // set textArea non-editable
+                    display4.setEditable ( false ); // set textArea non-editable
                     JScrollPane scroll = new JScrollPane ( display );
-                    scroll.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
+                    JScrollPane scroll2 = new JScrollPane ( display2 );
+                    JScrollPane scroll3 = new JScrollPane ( display3 );
+                    JScrollPane scroll4 = new JScrollPane ( display4 );
 
-                    //Add Textarea in to middle panel
+                    scroll.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
                     middlePanel.add ( scroll );
+                    middlePanel.add ( scroll2 );
+                    middlePanel.add ( scroll3 );
+                    middlePanel.add ( scroll4 );
 
                     // My code
                     JFrame frame = new JFrame("Output");
@@ -261,8 +272,16 @@ public class View {
 
                     String str1 = "";
                     String str2 = "";
-                    str1 += degreeVal + qualityVal +salaryVal + teamworkVal;
+                    String str3 = "";
+                    String str4 = "";
+                    str1 += degreeVal;
+                    str2 += qualityVal;
+                    str3 += salaryVal;
+                    str4 += teamworkVal;
                     display.setText(str1);
+                    display2.setText(str2);
+                    display3.setText(str3);
+                    display4.setText(str4);
 
 
                     //-------------------------------MY ADDITION-----------------------------
