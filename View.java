@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.geom.Arc2D;
 import java.util.Date;
 import javax.swing.*;
@@ -217,51 +219,61 @@ public class View {
                     System.out.println("Quality: " + qualityValue);
                     System.out.println("Teamwork: " + teamworkValue);
                     System.out.println();
-//                    perform function
 
+//                    perform function
                     Controller cc = new Controller((String) degreeValue, (int) salaryValue, (int) qualityValue, (int) teamworkValue);
                     cc.arraySort();
                     cc.printMaps();
-
                     System.out.println();
+                    String degreeVal = cc.find(1, degreeValue);
+                    String qualityVal = cc.find(2, qualityValue);
+                    String salaryVal = cc.find(3, salaryValue);
+                    String teamworkVal = cc.find(4, teamworkValue);
 
-
-                    String degreeVal = cc.find(null, 1, degreeValue);
-                    String qualityVal = cc.find(null, 2, qualityValue);
-                    String salaryVal = cc.find(null, 3, salaryValue);
-                    String teamworkVal = cc.find(null, 4, teamworkValue);
-
-//                    cc.find(degreeValue, 1, salaryValue);
-
-                    JFrame newFrame;
-                    JPanel leftPanel = new JPanel();
-                    JLabel nameLabel = new JLabel();
-                    JLabel frameTwoTopLabel;
+                    String exactMatch = cc.findMatch((String) degreeValue, (int) qualityValue, (int) salaryValue, (int) teamworkValue);
                     //newFrame = new JFrame("Output");
                     //newFrame.setSize(600, 600);
                     //frameTwoTopLabel = new JLabel("         Degree: " + degreeVal + "           Quality: "  + qualityVal +
                     //        "              Salary: " + salaryVal + "        Teamwork: " + teamworkVal);
                     //-----------------------------------My ADDITION----------------------
 
+
+                    JLabel degL, qualL, salQ, teamQ;
+                    degL = new JLabel("Degree: ");
+                    qualL = new JLabel("Quality: ");
+                    salQ = new JLabel("Salary: ");
+                    teamQ = new JLabel("Teamwork: ");
+
+
+
                     JPanel middlePanel = new JPanel ();
                     JTextArea display = new JTextArea ( 16, 15 );
                     JTextArea display2 = new JTextArea ( 16, 15 );
                     JTextArea display3 = new JTextArea ( 16, 15 );
                     JTextArea display4 = new JTextArea ( 16, 15 );
+                    JTextArea display5 = new JTextArea ( 16, 15 );
                     display.setEditable ( false ); // set textArea non-editable
                     display2.setEditable ( false ); // set textArea non-editable
                     display3.setEditable ( false ); // set textArea non-editable
                     display4.setEditable ( false ); // set textArea non-editable
+                    display5.setEditable(false);
                     JScrollPane scroll = new JScrollPane ( display );
                     JScrollPane scroll2 = new JScrollPane ( display2 );
                     JScrollPane scroll3 = new JScrollPane ( display3 );
                     JScrollPane scroll4 = new JScrollPane ( display4 );
+                    JScrollPane scroll5 = new JScrollPane ( display5 );
 
                     scroll.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
+//                    middlePanel.add(degL, BorderLayout.CENTER);
+//                    middlePanel.add(qualL, BorderLayout.CENTER);
+//                    middlePanel.add(salQ, BorderLayout.CENTER);
+//                    middlePanel.add(teamQ, BorderLayout.CENTER);
+
                     middlePanel.add ( scroll );
                     middlePanel.add ( scroll2 );
                     middlePanel.add ( scroll3 );
                     middlePanel.add ( scroll4 );
+                    middlePanel.add(scroll5);
 
                     // My code
                     JFrame frame = new JFrame("Output");
@@ -282,10 +294,18 @@ public class View {
                     display2.setText(str2);
                     display3.setText(str3);
                     display4.setText(str4);
+                    display5.setText(exactMatch);
 
-
+                    frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    frame.addWindowListener(new WindowAdapter() {
+                        @Override
+                        public void windowClosing(WindowEvent e) {
+                            super.windowClosing(e);
+                            resetButton.doClick();
+                        }
+                    });
                     //-------------------------------MY ADDITION-----------------------------
-                  //  nameLabel.setText(cc.find(salaryValue, 1, salaryValue));
+                    //  nameLabel.setText(cc.find(salaryValue, 1, salaryValue));
                     //newFrame.add(frameTwoTopLabel, BorderLayout.CENTER);
                     //newFrame.add(leftPanel, BorderLayout.WEST);
                     //newFrame.add(nameLabel, BorderLayout.EAST);
@@ -313,7 +333,6 @@ public class View {
         midpanel2.setVisible(true);
         panel.setVisible(true);
     }
-
     public Model getModel() {
         return this.classModel;
     }
