@@ -1,0 +1,11 @@
+README for cmpe130projectjava
+
+ 1. Download the zip from the github
+ 2. navigate to the file location
+ 3. type (javac cmpe130projectjava.java)
+ 4. then (java cmpe130projectjava)
+
+ 5. Program should start right after that(There may not be a logo because it is not the correct directory on your system)
+ 6. To test the program you choose one from each of the options given and submit and the program will search all input records for a candidate who matches your specifcations.
+    It will list 5 lists where in each box there are all candidates sorted in alphabetical order that match that qualification.
+    1-4 are single variables and box 5 lists all candidates who perfectly match the search input.
