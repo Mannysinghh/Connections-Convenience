@@ -1,17 +1,13 @@
-import javax.swing.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
 
 public class Controller {
+
     private String degree;
     private int salary;
     private int price;
     private int teamwork;
-//    private String[] employeeList = {"SJSU", "SJCC", "UCSD", "UCLA", "UCD ", "SDSU", "EVC ", "SFSU", "UCSF"};
-//    private String[] degreeList = {"CS  ", "CMPE", "SE  ", "MIS ", "NETW", "CS  ", "CMPE", "SE  ", "MIS "};
-//    private double[] salaryList = {3500, 500, 4200, 5000, 3800, 3200, 700, 3000, 4400};
-//    private double[] qualityList = {4.5, 2.0, 4.7, 5.0, 4.2, 4.0, 2.5, 4.0, 4.5};
-//    private double[] teamworkList = {10, 15, 450, 400, 200, 460, 15, 65, 70};
-
     private String[] employeeList = {
             "Carlos Meserve",
             "Laurie Bean",
@@ -65,29 +61,28 @@ public class Controller {
             "Jarrett Stadler",
     };
 
-    private String[] degreeList = {"CS",  "NETW", "NETW","CMPE", "CMPE",
+    private String[] degreeList = {"CS",  "CS", "NETW","CMPE", "CMPE",
             "CMPE",  "MIS", "SE", "SE", "SE", "SE", "MIS",  "MIS", "MIS", "CS",
             "MIS", "CS", "CS", "CS", "CMPE","CMPE","CMPE","CS", "SE","CS", "MIS",
             "CS", "NETW", "NETW", "CMPE", "NETW", "SE", "MIS",
             "MIS", "CMPE", "CMPE", "NETW", "NETW", "NETW", "CS",
             "SE", "CMPE", "MIS", "SE", "MIS", "SE", "CMPE", "NETW", "NETW", "NETW"};
 
-    private int[] salaryList = {3000, 4000, 5000, 6000, 7000, 5000, 6000, 7000,
+    private int[] salaryList = {3000, 3000, 5000, 6000, 7000, 5000, 6000, 7000,
             4000, 3000, 3000, 4000, 3000, 4000, 5000, 6000, 7000, 5000, 6000, 7000,
             4000, 3000, 5000, 6000, 7000, 3000, 4000, 5000, 6000, 7000, 5000, 6000,
             7000, 4000, 3000, 5000, 6000, 3000, 4000, 5000, 6000, 7000, 5000, 6000,
             7000, 4000, 3000, 7000, 4000, 3000};
 
-    private int[] qualityList = {1, 2, 2, 3, 5, 5, 3, 4, 1, 1, 1, 2, 3, 4, 4, 5,
+    private int[] qualityList = {1, 1, 2, 3, 5, 5, 3, 4, 1, 1, 1, 2, 3, 4, 4, 5,
             4, 4, 5, 4, 3, 2, 5, 3, 1, 5, 3, 4, 4, 5, 3, 3, 2, 2, 1, 5, 5, 1, 4, 4,
             3, 2, 5, 4, 5, 4, 3, 4, 5, 5};
 
-    private int[] teamworkList = {5, 2, 2, 3, 5, 5, 3, 4, 1, 1, 1, 2, 3, 4, 4,
+    private int[] teamworkList = {5, 5, 2, 3, 5, 5, 3, 4, 1, 1, 1, 2, 3, 4, 4,
             5, 4, 4, 5, 4, 3, 2, 5, 3, 3, 2, 3, 4, 4, 5, 3, 3, 2, 2, 1, 5, 5, 5, 5,
             3, 3, 1, 5, 3, 5, 4, 2, 5, 3, 2};
 
 
-    //    private String[] degreeListSorted;
     private int[] salaryListSorted;
     private int[] qualityListSorted;
     private int[] teamworkListSorted;
@@ -97,53 +92,38 @@ public class Controller {
     private Hashtable<Integer, List<String>> mapQualityKey = new Hashtable<>();
     private Hashtable<Integer, List<String>> mapTeamworkKey = new Hashtable<>();
 
-    private Hashtable<String, String> mapEmployeeTraits = new Hashtable<>();
+    private Hashtable<String, List<String>> mapEmployeeTraits = new Hashtable<>();
+    private List<String> traitMapList = null;
 
     private List<String> qualityMapList = null;
     private List<String> salaryMapList = null;
     private List<String> teamWorkMapList = null;
     private List<String> degreeMapList = null;
 
-    public List<String> getQualityMapList() {
-        return qualityMapList;
-    }
+    public Controller(String degree, int salary, int price, int teamwork) {
+        this.degree = degree;
+        this.salary = salary;
+        this.price = price;
+        this.teamwork = teamwork;
 
-    public void setQualityMapList(List<String> qualityMapList) {
-        this.qualityMapList = qualityMapList;
-    }
-
-    public List<String> getSalaryMapList() {
-        return salaryMapList;
-    }
-
-    public void setSalaryMapList(List<String> salaryMapList) {
-        this.salaryMapList = salaryMapList;
-    }
-
-    public List<String> getTeamWorkMapList() {
-        return teamWorkMapList;
-    }
-
-    public void setTeamWorkMapList(List<String> teamWorkMapList) {
-        this.teamWorkMapList = teamWorkMapList;
-    }
-
-    public List<String> getDegreeMapList() {
-        return degreeMapList;
-    }
-
-    public void setDegreeMapList(List<String> degreeMapList) {
-        this.degreeMapList = degreeMapList;
+        initiateMaps();
+        arraySort();
     }
 
     private void initiateMaps(){
         for(int i = 0; i < employeeList.length; i++){
 
             String traits = degreeList[i] + ":" + qualityList[i] + ":" + salaryList[i] + ":" + teamworkList[i];
-
-            mapEmployeeTraits.put(traits, employeeList[i]);
-
-
+//            mapEmployeeTraits.put(traits, employeeList[i]);
+            if(mapEmployeeTraits.containsKey(traits)){
+                traitMapList = mapEmployeeTraits.get(traits);
+                traitMapList.add(employeeList[i]);
+            }
+            else{
+                traitMapList = new ArrayList<>();
+                traitMapList.add(employeeList[i]);
+                mapEmployeeTraits.put(traits, traitMapList);
+            }
             if (mapQualityKey.containsKey(qualityList[i])) {
                 qualityMapList = mapQualityKey.get(qualityList[i]);
                 qualityMapList.add(employeeList[i]);
@@ -152,7 +132,6 @@ public class Controller {
                 qualityMapList.add(employeeList[i]);
                 mapQualityKey.put(qualityList[i], qualityMapList);
             }
-
             if (mapSalaryKey.containsKey(salaryList[i])) {
                 salaryMapList = mapSalaryKey.get(salaryList[i]);
                 salaryMapList.add(employeeList[i]);
@@ -182,21 +161,6 @@ public class Controller {
         }
     }
 
-    public Controller() {
-        initiateMaps();
-        arraySort();
-    }
-
-    public Controller(String degree, int salary, int price, int teamwork) {
-        this.degree = degree;
-        this.salary = salary;
-        this.price = price;
-        this.teamwork = teamwork;
-
-        initiateMaps();
-        arraySort();
-    }
-
     public void printMaps() {
         for (int i = 0; i < employeeList.length; i++) {
             System.out.println("Name: " + employeeList[i] +
@@ -207,21 +171,21 @@ public class Controller {
         }
     }
 
-    public void printSortedList(){
-        for (int i = 0; i < employeeList.length; i++) {
-            System.out.println(" | Salary: " + salaryListSorted[i] +
-                    " | Quality: " + qualityListSorted[i] +
-                    " | Teamwork: " + teamworkListSorted[i]);
-        }
-    }
-
     public String findMatch(String degree, int quality, int salary, int teamwork){
         String match = "No Specific Match Found";
 
         String traitMatch = degree + ":" + quality + ":" + salary + ":" + teamwork;
 
+        List<String> matches = null;
+
         if (mapEmployeeTraits.get(traitMatch) != null) {
-            match = mapEmployeeTraits.get(traitMatch);
+            matches = mapEmployeeTraits.get(traitMatch);
+            match = "";
+            if(matches.size() > 0) {
+                for (String matchFound : matches) {
+                    match += matchFound + "\n";
+                }
+            }
         }
 
         return match;
@@ -284,12 +248,6 @@ public class Controller {
             b[i] = input[i + N / 2];
         }
         return merge(mergesort(a), mergesort(b));
-    }
-
-    private static boolean isSorted(int[] a) {
-        for (int i = 1; i < a.length; i++)
-            if (a[i] < a[i-1]) return false;
-        return true;
     }
 
     public void arraySort(){
@@ -374,6 +332,38 @@ public class Controller {
 
     public void setTeamwork(int teamwork) {
         this.teamwork = teamwork;
+    }
+
+    public List<String> getQualityMapList() {
+        return qualityMapList;
+    }
+
+    public void setQualityMapList(List<String> qualityMapList) {
+        this.qualityMapList = qualityMapList;
+    }
+
+    public List<String> getSalaryMapList() {
+        return salaryMapList;
+    }
+
+    public void setSalaryMapList(List<String> salaryMapList) {
+        this.salaryMapList = salaryMapList;
+    }
+
+    public List<String> getTeamWorkMapList() {
+        return teamWorkMapList;
+    }
+
+    public void setTeamWorkMapList(List<String> teamWorkMapList) {
+        this.teamWorkMapList = teamWorkMapList;
+    }
+
+    public List<String> getDegreeMapList() {
+        return degreeMapList;
+    }
+
+    public void setDegreeMapList(List<String> degreeMapList) {
+        this.degreeMapList = degreeMapList;
     }
 
 }

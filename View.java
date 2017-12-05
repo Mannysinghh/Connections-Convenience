@@ -3,16 +3,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.Date;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
 public class View {
-    static JPanel CalendarPanel;
+    static JPanel connectionsPanel;
     static JPanel midPanel;
     static JPanel midpanel2;
     static JPanel midPanel3;
@@ -43,7 +39,7 @@ public class View {
     static JComboBox qualityBox;
     static JComboBox salaryBox;
     static JComboBox teamworkBox;
-    ImageIcon imageIcon = new ImageIcon(new ImageIcon("/Users/Singh/Documents/Workspace/cmpe130projectjava/src/logo.png").getImage().getScaledInstance(400, 300, Image.SCALE_DEFAULT));
+    ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/logo.png").getImage().getScaledInstance(400, 300, Image.SCALE_DEFAULT));
 
     static JLabel imgLabel;
     Date date = new Date();
@@ -56,22 +52,12 @@ public class View {
 
     public View(final Model classModel) {
         Timer timer = new Timer(1000, new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 dateJlabel.setText(new Date().toString());
             }
         });
         timer.start();
-
-//        BufferedImage img = null;
-//        try {
-//            img = ImageIO.read(new File("/Users/Singh/Documents/Workspace/cmpe130projectjava/src/Picture1.png"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        Image dimg = img.getScaledInstance(label.getWidth(), label.getHeight(),
-//                Image.SCALE_SMOOTH);
 
         imgLabel = new JLabel();
         imgLabel.setIcon(imageIcon);
@@ -88,9 +74,9 @@ public class View {
         midPanel4 = new JPanel();
         bottomPanel = new JPanel();
         lastPanel = new JPanel();
-        CalendarPanel = new JPanel();
+        connectionsPanel = new JPanel();
         pane = frame.getContentPane();
-        CalendarPanel.setBorder(BorderFactory.createTitledBorder("Calendar"));
+        connectionsPanel.setBorder(BorderFactory.createTitledBorder("Calendar"));
         TitledBorder border = new TitledBorder("Select your options: ");
         border.setTitleJustification(TitledBorder.CENTER);
         border.setTitlePosition(TitledBorder.TOP);
@@ -158,13 +144,10 @@ public class View {
         midPanel.add(teamWorkLabel, BorderLayout.CENTER);
 
 
-//        midPanel.add(topLabel, BorderLayout.CENTER);
         midPanel3.add(degreeBox, BorderLayout.CENTER);
         midPanel3.add(qualityBox, BorderLayout.CENTER);
         midPanel3.add(salaryBox, BorderLayout.CENTER);
         midPanel3.add(teamworkBox, BorderLayout.CENTER);
-//        bottomPanel.setBounds(0, 180, 30, 30);
-//        lastPanel.setBounds(0, 20, 30, 30);
 
         midPanel4.add(imgLabel, BorderLayout.CENTER);
         lastPanel.add(exitButton, BorderLayout.CENTER);
@@ -271,7 +254,6 @@ public class View {
                     topT.setHorizontalAlignment(SwingConstants.CENTER);
                     topC.setHorizontalAlignment(SwingConstants.CENTER);
 
-//                    perform function
                     Controller cc = new Controller((String) degreeValue, (int) salaryValue, (int) qualityValue, (int) teamworkValue);
                     cc.arraySort();
                     cc.printMaps();
@@ -309,30 +291,18 @@ public class View {
                     scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
 
-                    String str1 = "";
-                    String str2 = "";
-                    String str3 = "";
-                    String str4 = "";
-                    str1 += degreeVal;
-                    str2 += qualityVal;
-                    str3 += salaryVal;
-                    str4 += teamworkVal;
-
-                    String[] str1sorted = str1.split("\n");
-                    String[] str2sorted = str2.split("\n");
-                    String[] str3sorted = str3.split("\n");
-                    String[] str4sorted = str4.split("\n");
+                    String[] degreeSorted = degreeVal.split("\n");
+                    String[] qualitySorted = qualityVal.split("\n");
+                    String[] salarySorted = salaryVal.split("\n");
+                    String[] teamworkSorted = teamworkVal.split("\n");
 
                     long startSortingTime = System.nanoTime();
-                    cc.mergeSortString(str1sorted);
-                    cc.mergeSortString(str2sorted);
-                    cc.mergeSortString(str3sorted);
-                    cc.mergeSortString(str4sorted);
+                    cc.mergeSortString(degreeSorted);
+                    cc.mergeSortString(qualitySorted);
+                    cc.mergeSortString(salarySorted);
+                    cc.mergeSortString(teamworkSorted);
                     long endSortingTime   = System.nanoTime();
                     long totalSortingTime = endSortingTime - startSortingTime;
-
-//                    double totalSortingTimeSeconds = TimeUnit.SECONDS.convert(totalSortingTime, TimeUnit.NANOSECONDS);
-//                    double totalSearchTimeSeconds = TimeUnit.SECONDS.convert(totalSearchTime, TimeUnit.NANOSECONDS);
 
                     JLabel totalSearchTimeLabel = new JLabel("Search Time: " + Double.toString(totalSearchTime) + " ns");
                     JLabel totalSortingTimeLabel = new JLabel("Sorting Time: " + Double.toString(totalSortingTime)  + " ns");
@@ -341,10 +311,10 @@ public class View {
                     totalSortingTimeLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 
 
-                    String text1 = getText(str1sorted);
-                    String text2 = getText(str2sorted);
-                    String text3 = getText(str3sorted);
-                    String text4 = getText(str4sorted);
+                    String degreeText = getText(degreeSorted);
+                    String qualityText = getText(qualitySorted);
+                    String salaryText = getText(salarySorted);
+                    String teamworkText = getText(teamworkSorted);
 
                     if(exactMatch.equals("No Specific Match Found")){
                         display5.setForeground(Color.RED);
@@ -352,10 +322,10 @@ public class View {
                     else{
                         display5.setForeground(Color.GREEN);
                     }
-                    display.setText(text1);
-                    display2.setText(text2);
-                    display3.setText(text3);
-                    display4.setText(text4);
+                    display.setText(degreeText);
+                    display2.setText(qualityText);
+                    display3.setText(salaryText);
+                    display4.setText(teamworkText);
                     display5.setText("\n" + exactMatch);
 
                     topP.add(topD);
@@ -421,11 +391,11 @@ public class View {
     }
 
     private String getText(String[] strings) {
-        String ss = "";
+        String text = "";
         for (int i = 0; i < strings.length; i++) {
-            ss += strings[i] + " \n";
+            text += strings[i] + " \n";
         }
-        return ss;
+        return text;
     }
 
     public Model getModel() {

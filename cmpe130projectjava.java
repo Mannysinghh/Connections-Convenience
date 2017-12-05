@@ -5,16 +5,13 @@ public class cmpe130projectjava {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    createAndShowGUI();
+                    Model app = new Model();
+                    new View(app);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
-    }
-    public static void createAndShowGUI() throws Exception {
-        Model app = new Model();
-        new View(app);
     }
 }
 
